@@ -4,7 +4,7 @@ const seedProducts = require('./product-seeds');
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
-    await sequelize.sync({ foorce: false });
+    await sequelize.sync({ force: false });
     console.log('\n-----DATABASE SYNCED-----\n');
 
     await seedCategories();
