@@ -31,5 +31,6 @@
   "bugs": {
     "url": "https://github.com/JackAtkerson/Invetory-manager/issues"
   },
-  "homepage": "https://github.com/JackAtkerson/Invetory-manager#readme"
+  "homepage": "https://github.com/JackAtkerson/Invetory-manager#readme",
+  "devDependencies": {}
 }
