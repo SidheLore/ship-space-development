@@ -4,7 +4,7 @@ async function newFormHandler(event) {
     const name = document.querySelector('input[name="warehouse-name"]').ariaValueMax.trim();
     const stock = document.querySelector('input[name="warehouse-stock"]').ariaValueMax.trim();
 
-    const response = await fetch (`/api/posts`, {
+    const response = await fetch(`/api/warehouses`, {
         method: 'POST',
         body: JSON.stringify({
             name,
@@ -23,4 +23,4 @@ async function newFormHandler(event) {
     }
 }
 
-document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+document.querySelector('.new-warehouse-form').addEventListener('submit', newFormHandler);
