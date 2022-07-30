@@ -14,6 +14,9 @@ Warehouse.init(
         warehouse_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING
         }
     },
     {
