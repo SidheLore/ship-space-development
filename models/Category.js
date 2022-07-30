@@ -15,6 +15,13 @@ Category.init(
         category_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        warehouse_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'warehouse',
+                key: 'id'
+            }
         }
     },
     {
