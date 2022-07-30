@@ -1,23 +1,16 @@
 const router = require('express').Router();
 const { Op } = require('sequelize');
-const { Recipe, User, Comment } = require('../models');
+const { User, Comment, Product } = require('../models');
 
 router.get('/', (req, res) => {
     console.log(req.session)
-    Recipe.findAll({
+    Product.findAll({
         where: {
           id: {
             [Op.between]: [1,6]
           }
         },
-        attributes: [
-            'id',
-            'title',
-            'ingredients',
-            'recipe_steps',
-            'category',
-            'image_url'
-        ],
+        
         order: [['created_at', 'DESC']], 
         include: [
             {
@@ -27,9 +20,9 @@ router.get('/', (req, res) => {
         ]
     })
         .then(dbPostData => {
-          const recipes = dbPostData.map(recipe => recipe.get({ plain: true }));
+          const products = dbPostData.map(product => product.get({ plain: true }));
           res.render('homepage', {
-            recipes,
+            products,
             loggedIn: req.session.loggedIn
           });
         })
@@ -39,15 +32,15 @@ router.get('/', (req, res) => {
         });
 });
 
-// find all recipes
-router.get('/recipes', (req, res) => {
+// find all products
+router.get('/products', (req, res) => {
   console.log(req.session)
-  Recipe.findAll({
+  Product.findAll({
       attributes: [
           'id',
-          'title',
-          'category',
-          'image_url'
+          'product_name',
+          'stock',
+          'category_id'
       ],
       order: [['created_at', 'DESC']], 
       include: [
@@ -58,9 +51,9 @@ router.get('/recipes', (req, res) => {
       ]
   })
       .then(dbPostData => {
-        const recipes = dbPostData.map(recipe => recipe.get({ plain: true }));
+        const products = dbPostData.map(product => product.get({ plain: true }));
         res.render('category', {
-          recipes,
+          product,
           loggedIn: req.session.loggedIn
         });
       })
@@ -71,24 +64,23 @@ router.get('/recipes', (req, res) => {
 });
 
 // get single post
-router.get('/recipes/:id', (req,res) => {
-  Recipe.findOne({
+router.get('/product/:id', (req,res) => {
+  Product.findOne({
       where: {
         id: req.params.id
       },
       attributes: [
         'id',
-        'title',
-        'category',
-        'image_url',
-        'created_at',
-        'recipe_steps',
-        'ingredients'
+        'product_name',
+        'stock',
+        'category_id',
+        
+        
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_text', 'user_id', 'recipe_id', 'created_at'],
+          attributes: ['id', 'comment_text', 'user_id', 'product_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
@@ -105,9 +97,9 @@ router.get('/recipes/:id', (req,res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      const recipe = dbPostData.get({ plain: true });
-      res.render('single-recipe', {
-        recipe,
+      const product = dbPostData.get({ plain: true });
+      res.render('single-product', {
+        product,
         loggedIn: req.session.loggedIn
       });
   })
@@ -117,7 +109,7 @@ router.get('/recipes/:id', (req,res) => {
   });
 })
 
-router.get('/recipes/category/:category', (req, res) => {
+router.get('/product/category/:category', (req, res) => {
   console.log(req.params.category)
   Recipe.findAll({
       where: {
@@ -125,9 +117,8 @@ router.get('/recipes/category/:category', (req, res) => {
       },
       attributes: [
           'id',
-          'title',
-          'category',
-          'image_url'
+          'category_name',
+    
       ],
       order: [['created_at', 'DESC']], 
       include: [
@@ -142,9 +133,9 @@ router.get('/recipes/category/:category', (req, res) => {
           res.status(404).json({ message: 'No post found with this category' });
           return;
         }
-        const recipes = dbPostData.map(recipe => recipe.get({ plain: true }));
+        const products = dbPostData.map(product => product.get({ plain: true }));
         res.render('category', {
-          recipes,
+          products,
           loggedIn: req.session.loggedIn
         });
       })

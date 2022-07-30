@@ -11,21 +11,21 @@ Product.belongsTo(User, {
 	foreignKey : 'user_id'
 });
 
-Comment.belongsTo(User, {
-	foreignKey : 'user_id'
-});
+//Comment.belongsTo(User, {
+//	foreignKey : 'user_id'
+//});
 
-Comment.belongsTo(Product, {
-	foreignKey : 'recipe_id'
-});
+//Comment.belongsTo(Product, {
+//	foreignKey : 'product_id'
+//});
 
 User.hasMany(Comment, {
 	foreignKey : 'user_id'
 });
 
-Product.hasMany(Comment, {
-	foreignKey : 'recipe_id'
-});
+//Product.hasMany(Comment, {
+//	foreignKey : 'comment_id'
+//});
 
 Product.belongsTo(Category, {
     foreignKey: 'category_id'

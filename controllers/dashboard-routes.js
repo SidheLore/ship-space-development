@@ -1,28 +1,26 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Recipe, User, Comment } = require('../models');
+const { Recipe, User, Comment, Product } = require('../models');
 const withAuth = require('../utils/auth');
 
-// gets all recipes posted by user that is currently logged in
+// gets all products posted by user that is currently logged in
 router.get('/', withAuth, (req, res) => {
     console.log(req.session.user_id)
-    Recipe.findAll({
+    Product.findAll({
       where: {
         user_id: req.session.user_id
       },
       attributes: [
-        'id',
-        'title',
-        'ingredients',
-        'recipe_steps',
-        'category',
-        'image_url'
+           'id',
+          'product_name',
+          'stock',
+          'category_id'
     ],
     order: [['created_at', 'DESC']], 
     include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_text', 'user_id', 'recipe_id'],
+          attributes: ['id', 'comment_text', 'user_id', 'product_id'],
           include: {
             model: User,
             attributes: ['username']
@@ -35,8 +33,8 @@ router.get('/', withAuth, (req, res) => {
     ]
   })
   .then(dbPostData => {
-    const recipes = dbPostData.map(recipe => recipe.get({ plain: true }));
-    res.render('dashboard', { recipes, loggedIn: true });
+    const products = dbPostData.map(product => product.get({ plain: true }));
+    res.render('dashboard', { products, loggedIn: true });
   })
   .catch(err => {
     console.log(err);
@@ -45,21 +43,19 @@ router.get('/', withAuth, (req, res) => {
 
 });
 
-// add new recipe
+// add new product
 router.get('/new', withAuth, (req,res) => {
   res.render('add-post', {loggedIn: true});
 })
 
 // when clicking on edit post, will be redirected to this page
 router.get('/edit/:id', withAuth, (req, res) => {
-    Recipe.findByPk(req.params.id, {
+    Product.findByPk(req.params.id, {
         attributes: [
-            'id',
-            'title',
-            'ingredients',
-            'recipe_steps',
-            'category',
-            'image_url'
+          'id',
+          'product_name',
+          'stock',
+          'category_id'
         ],
         include: [
         {
@@ -71,8 +67,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
         .then(dbPostData => {
         const recipe = dbPostData.get({ plain: true });
 
-        res.render('edit-recipe', {
-        recipe,
+        res.render('edit-product', {
+        product,
         loggedIn: true
         });
 

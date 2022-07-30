@@ -1,5 +1,5 @@
 const seedComments = require('./comment-seeds');
-const seedRecipe = require('./recipe-seeds');
+//const seedRecipe = require('./recipe-seeds');
 const seedUsers = require('./user-seeds');
 const seedCategories = require('./category-seeds');
 const seedProducts = require('./product-seeds');
