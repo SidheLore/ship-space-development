@@ -1,0 +1,22 @@
+<div>
+    <header>
+        <h2>{{warehouse_name}}</h2>
+    </header>
+    {{#each category}}
+    <h2>{{category.category_name}}</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+        </tr>
+        {{#each product}}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.product_name}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+        {{/each}}
+    </table>
+    {{/each}}
+</div>

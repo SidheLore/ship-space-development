@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
+<<<<<<< HEAD
 const { Recipe, User, Comment, Product } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -79,4 +80,12 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 })
 
+=======
+const { Warehouse, Category, Product } = require('../models');
+
+router.get('/', (req, res) => {
+    res.render('dashboard', { loggedIn: true });
+});
+
+>>>>>>> feature/dashboard
 module.exports = router;
