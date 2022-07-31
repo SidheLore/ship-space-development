@@ -1,0 +1,1 @@
+const { Warehouse } = require('../models')

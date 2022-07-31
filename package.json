@@ -17,20 +17,6 @@
   "bugs": {
     "url": "https://github.com/tmashoro/pp-2/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/tmashoro/pp-2#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "connect-session-sequelize": "^7.0.1",
-    "dotenv": "^16.0.1",
-    "express": "^4.17.1",
-    "express-handlebars": "^5.1.0",
-    "express-session": "^1.17.1",
-    "mysql2": "^2.1.0",
-    "sequelize": "^6.3.5"
-  }
-=======
   "homepage": "https://github.com/JackAtkerson/Invetory-manager#readme",
   "devDependencies": {}
->>>>>>> feature/dashboard
 }

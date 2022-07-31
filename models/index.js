@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-const User = require('./User');
-const Comment = require('./Comment');
-=======
 const Warehouse = require('./Warehouse');
 const Category = require('./Category');
->>>>>>> feature/dashboard
 const Product = require('./Product');
-const Category = require('./Category');
+const User = require('./User');
 
 User.hasMany(Product, {
 	foreignKey : 'user_id'
@@ -24,9 +19,9 @@ Product.belongsTo(User, {
 //	foreignKey : 'product_id'
 //});
 
-User.hasMany(Comment, {
-	foreignKey : 'user_id'
-});
+//User.hasMany(Comment, {
+//	foreignKey : 'user_id'
+//});
 
 //Product.hasMany(Comment, {
 //	foreignKey : 'comment_id'
@@ -40,14 +35,6 @@ Product.belongsTo(Category, {
     foreignKey: 'category_id'
 });
 
-<<<<<<< HEAD
-//Product.belongsToMany(Tag, {
-//	foreignKey: 'product_id',
-//	through:ProductTag
-//})
-
-module.exports = { User, Comment, Category, Product};
-=======
 Warehouse.hasMany(Category, {
     foreignKey: 'warehouse_id'
 });
@@ -63,6 +50,6 @@ Category.belongsTo(Warehouse, {
 module.exports = {
     Warehouse,
     Category,
-    Product
+    Product,
+    User
 };
->>>>>>> feature/dashboard
